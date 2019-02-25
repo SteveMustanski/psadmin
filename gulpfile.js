@@ -23,21 +23,23 @@ gulp.task("connect", function() {
   });
 });
 
-gulp.task("open", ["connect"], function() {
+gulp.task("open", gulp.series("connect"), function(done) {
   gulp
     .src("dist/index.html")
     .pipe(open({ uri: config.devBaseUrl + ":" + config.port + "/" }));
+  done();
 });
 
-gulp.task("html", function() {
+gulp.task("html", function(done) {
   gulp
     .src(config.paths.html)
     .pipe(gulp.dest(config.paths.dist))
     .pipe(connect.reload());
+  done();
 });
 
 gulp.task("watch", function() {
   gulp.watch(config.paths.html, ["html"]);
 });
 
-gulp.task("default", ["html", "open", "watch"]);
+gulp.task("default", gulp.series("html", "open", "watch"));
