@@ -3,13 +3,18 @@
 var gulp = require("gulp");
 var connect = require("gulp-connect");
 var open = require("gulp-open");
+var browserify = require("browserify"); // to bundle JS
+var reactify = require("reactify"); // convert React JSX to JS
+var source = require("vinyl-source-stream"); // use text streams with gulp
 
 var config = {
   port: 9005,
   devBaseUrl: "http://localhost",
   paths: {
     html: "./src/*.html",
-    dist: "./dist"
+    js: "./src/**/*.js",
+    dist: "./dist",
+    mainJs: "./src/main.js"
   }
 };
 
@@ -38,8 +43,23 @@ gulp.task("html", function(done) {
   done();
 });
 
-gulp.task("watch", function() {
-  gulp.watch(config.paths.html, ["html"]);
+gulp.task("js", function(done) {
+  browserify(config.paths.mainJs)
+    .transform(reactify)
+    .bundle()
+    .on("error", console.error.bind(console))
+    .pipe(source("bundle.js"))
+    .pipe(gulp.dest(config.paths.dist + "/scripts"))
+    .pipe(connect.reload());
+  done();
 });
 
-gulp.task("default", gulp.series("html", "open", "watch"));
+gulp.task("watch", function() {
+  gulp.watch(config.paths.html, gulp.series("html"));
+  gulp.watch(config.paths.js, gulp.series("js"));
+  // console.log("watching");
+  // done();
+});
+
+let build = gulp.series("html", "js");
+gulp.task("default", gulp.series(build, gulp.parallel("open", "watch")));
