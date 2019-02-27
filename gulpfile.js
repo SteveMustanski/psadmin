@@ -1,14 +1,14 @@
 "use strict";
 
-var gulp = require("gulp");
-var connect = require("gulp-connect");
-var open = require("gulp-open");
-var browserify = require("browserify"); // to bundle JS
-var reactify = require("reactify"); // convert React JSX to JS
-var source = require("vinyl-source-stream"); // use text streams with gulp
-var concat = require("gulp-concat");
+const gulp = require("gulp");
+const connect = require("gulp-connect");
+const open = require("gulp-open");
+const browserify = require("browserify"); // to bundle JS
+const reactify = require("reactify"); // convert React JSX to JS
+const source = require("vinyl-source-stream"); // use text streams with gulp
+const concat = require("gulp-concat");
 
-var config = {
+const config = {
   port: 9006,
   devBaseUrl: "http://localhost",
   paths: {
