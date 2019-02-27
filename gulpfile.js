@@ -9,11 +9,12 @@ const source = require("vinyl-source-stream"); // use text streams with gulp
 const concat = require("gulp-concat");
 
 const config = {
-  port: 9006,
+  port: 9003,
   devBaseUrl: "http://localhost",
   paths: {
     html: "./src/*.html",
     js: "./src/**/*.js",
+    images: "./src/images/*",
     css: "node_modules/bootstrap/dist/css/bootstrap.min.css",
     dist: "./dist",
     mainJs: "./src/main.js"
@@ -26,7 +27,7 @@ gulp.task("connect", function() {
     root: ["dist"],
     port: config.port,
     base: config.devBaseUrl,
-    livereload: true
+    livereload: false
   });
 });
 
@@ -41,6 +42,14 @@ gulp.task("html", function(done) {
   gulp
     .src(config.paths.html)
     .pipe(gulp.dest(config.paths.dist))
+    .pipe(connect.reload());
+  done();
+});
+
+gulp.task("images", function(done) {
+  gulp
+    .src(config.paths.images)
+    .pipe(gulp.dest(config.paths.dist + "/images"))
     .pipe(connect.reload());
   done();
 });
@@ -69,5 +78,5 @@ gulp.task("watch", function() {
   gulp.watch(config.paths.js, gulp.series("js"));
 });
 
-let build = gulp.series("html", "js", "css");
+let build = gulp.series("html", "js", "images", "css");
 gulp.task("default", gulp.series(build, gulp.parallel("open", "watch")));
