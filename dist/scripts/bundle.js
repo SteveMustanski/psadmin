@@ -47508,6 +47508,9 @@ module.exports = AboutPage;
 const React = require("react");
 
 const AuthorList = React.createClass({displayName: "AuthorList",
+  propTypes: {
+    authors: React.propTypes.isRequired
+  },
   render: function() {
     const createAuthorRow = function(author) {
       return (
