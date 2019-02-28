@@ -50462,9 +50462,11 @@ const React = require("react");
 class HomePage extends React.Component {
   render() {
     return (
-      React.createElement("div", {className: "jumbotron"}, 
-        React.createElement("h1", null, "Pluralsight Administration"), 
-        React.createElement("p", null, "React, React Router, and Flux for ultra-responsive web apps.")
+      React.createElement("div", {className: "container-fluid"}, 
+        React.createElement("div", {className: "jumbotron"}, 
+          React.createElement("h1", null, "Pluralsight Administration"), 
+          React.createElement("p", null, "React, React Router, and Flux for ultra-responsive web apps.")
+        )
       )
     );
   }
@@ -50478,7 +50480,7 @@ const React = require("react");
 class AboutPage extends React.Component {
   render() {
     return (
-      React.createElement("div", {className: "container"}, 
+      React.createElement("div", {className: "container-fluid"}, 
         React.createElement("h1", null, "About"), 
         React.createElement("p", null, 
           "This page uses the following technologies:", 
@@ -50522,7 +50524,7 @@ const AuthorList = React.createClass({displayName: "AuthorList",
       );
     };
     return (
-      React.createElement("div", {className: "container"}, 
+      React.createElement("div", {className: "container-fluid"}, 
         React.createElement("table", {className: "table"}, 
           React.createElement("thead", null, 
             React.createElement("th", null, "ID"), 
@@ -50559,7 +50561,7 @@ const AuthorPage = React.createClass({displayName: "AuthorPage",
 
   render: function() {
     return (
-      React.createElement("div", {className: "container"}, 
+      React.createElement("div", {className: "container-fluid"}, 
         React.createElement("h1", null, "Authors"), 
         React.createElement(AuthorList, {authors: this.state.authors})
       )

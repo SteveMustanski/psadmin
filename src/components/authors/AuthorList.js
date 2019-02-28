@@ -20,7 +20,7 @@ const AuthorList = React.createClass({
       );
     };
     return (
-      <div className="container">
+      <div className="container-fluid">
         <table className="table">
           <thead>
             <th>ID</th>

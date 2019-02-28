@@ -19,7 +19,7 @@ const AuthorPage = React.createClass({
 
   render: function() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <h1>Authors</h1>
         <AuthorList authors={this.state.authors} />
       </div>

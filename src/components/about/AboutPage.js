@@ -3,7 +3,7 @@ const React = require("react");
 class AboutPage extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <h1>About</h1>
         <p>
           This page uses the following technologies:
