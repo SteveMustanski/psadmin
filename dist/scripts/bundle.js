@@ -47506,19 +47506,8 @@ module.exports = AboutPage;
 "use strict";
 
 const React = require("react");
-const AuthorApi = require("../../api/authorApi");
 
-const AuthorPage = React.createClass({displayName: "AuthorPage",
-  getInitialState: function() {
-    return {
-      authors: []
-    };
-  },
-
-  componentWillMount: function() {
-    this.setState({ authors: AuthorApi.getAllAuthors() });
-  },
-
+const AuthorList = React.createClass({displayName: "AuthorList",
   render: function() {
     const createAuthorRow = function(author) {
       return (
@@ -47534,14 +47523,45 @@ const AuthorPage = React.createClass({displayName: "AuthorPage",
     };
     return (
       React.createElement("div", {className: "container"}, 
-        React.createElement("h1", null, "Authors"), 
         React.createElement("table", {className: "table"}, 
           React.createElement("thead", null, 
             React.createElement("th", null, "ID"), 
             React.createElement("th", null, "Name")
           ), 
-          React.createElement("tbody", null, this.state.authors.map(createAuthorRow, this))
+          React.createElement("tbody", null, this.props.authors.map(createAuthorRow, this))
         )
+      )
+    );
+  }
+});
+
+module.exports = AuthorList;
+
+},{"react":158}],164:[function(require,module,exports){
+"use strict";
+
+const React = require("react");
+const AuthorApi = require("../../api/authorApi");
+const AuthorList = require("./AuthorList");
+
+const AuthorPage = React.createClass({displayName: "AuthorPage",
+  getInitialState: function() {
+    return {
+      authors: []
+    };
+  },
+
+  componentDidMount: function() {
+    if (this.isMounted()) {
+      this.setState({ authors: AuthorApi.getAllAuthors() });
+    }
+  },
+
+  render: function() {
+    return (
+      React.createElement("div", {className: "container"}, 
+        React.createElement("h1", null, "Authors"), 
+        React.createElement(AuthorList, {authors: this.state.authors})
       )
     );
   }
@@ -47549,7 +47569,7 @@ const AuthorPage = React.createClass({displayName: "AuthorPage",
 
 module.exports = AuthorPage;
 
-},{"../../api/authorApi":159,"react":158}],164:[function(require,module,exports){
+},{"../../api/authorApi":159,"./AuthorList":163,"react":158}],165:[function(require,module,exports){
 const React = require("react");
 
 class Header extends React.Component {
@@ -47586,7 +47606,7 @@ class Header extends React.Component {
 
 module.exports = Header;
 
-},{"react":158}],165:[function(require,module,exports){
+},{"react":158}],166:[function(require,module,exports){
 $ = jQuery = require("jquery");
 const React = require("react");
 const HomePage = require("./components/HomePage");
@@ -47625,4 +47645,4 @@ const render = () => {
 window.addEventListener("hashchange", render);
 render();
 
-},{"./components/HomePage":161,"./components/about/AboutPage":162,"./components/authors/AuthorPage":163,"./components/common/Header":164,"jquery":1,"react":158}]},{},[165]);
+},{"./components/HomePage":161,"./components/about/AboutPage":162,"./components/authors/AuthorPage":164,"./components/common/Header":165,"jquery":1,"react":158}]},{},[166]);
