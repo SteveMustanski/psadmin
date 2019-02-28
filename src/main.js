@@ -3,6 +3,7 @@ const React = require("react");
 const HomePage = require("./components/HomePage");
 const AboutPage = require("./components/about/AboutPage");
 const Header = require("./components/common/Header");
+const AuthorsPage = require("./components/authors/AuthorPage");
 
 class App extends React.Component {
   render() {
@@ -11,6 +12,9 @@ class App extends React.Component {
     switch (this.props.route) {
       case "About":
         Child = AboutPage;
+        break;
+      case "Authors":
+        Child = AuthorsPage;
         break;
       default:
         Child = HomePage;
