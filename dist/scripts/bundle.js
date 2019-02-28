@@ -47481,7 +47481,7 @@ const React = require("react");
 class AboutPage extends React.Component {
   render() {
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {className: "container"}, 
         React.createElement("h1", null, "About"), 
         React.createElement("p", null, 
           "This page uses the following technologies:", 
