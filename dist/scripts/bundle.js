@@ -50458,6 +50458,8 @@ module.exports = App;
 
 },{"./common/Header":206,"jquery":1,"react":197,"react-router":33}],202:[function(require,module,exports){
 const React = require("react");
+const Router = require("react-router");
+const Link = Router.Link;
 
 class HomePage extends React.Component {
   render() {
@@ -50465,7 +50467,10 @@ class HomePage extends React.Component {
       React.createElement("div", {className: "container-fluid"}, 
         React.createElement("div", {className: "jumbotron"}, 
           React.createElement("h1", null, "Pluralsight Administration"), 
-          React.createElement("p", null, "React, React Router, and Flux for ultra-responsive web apps.")
+          React.createElement("p", null, "React, React Router, and Flux for ultra-responsive web apps."), 
+          React.createElement(Link, {to: "about", className: "btn btn-primary btn-lg"}, 
+            "Learn More"
+          )
         )
       )
     );
@@ -50474,7 +50479,7 @@ class HomePage extends React.Component {
 
 module.exports = HomePage;
 
-},{"react":197}],203:[function(require,module,exports){
+},{"react":197,"react-router":33}],203:[function(require,module,exports){
 const React = require("react");
 
 class AboutPage extends React.Component {
