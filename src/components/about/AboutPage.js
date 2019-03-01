@@ -8,6 +8,11 @@ const AboutPage = React.createClass({
       } else {
         callback();
       }
+    },
+    willTransitionFrom: (transition, compoenent) => {
+      if (!confirm("Are you sure you want to leave this page?")) {
+        transition.about();
+      }
     }
   },
 
