@@ -1,6 +1,16 @@
 const React = require("react");
 
-class AboutPage extends React.Component {
+const AboutPage = React.createClass({
+  statics: {
+    willTransitionTo: (transition, params, query, callback) => {
+      if (!confirm("Are you sure you want to read the about page?")) {
+        transition.about();
+      } else {
+        callback();
+      }
+    }
+  },
+
   render() {
     return (
       <div className="container-fluid">
@@ -20,6 +30,6 @@ class AboutPage extends React.Component {
       </div>
     );
   }
-}
+});
 
 module.exports = AboutPage;

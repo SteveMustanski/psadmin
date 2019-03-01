@@ -50506,7 +50506,17 @@ module.exports = NotFound;
 },{"react":197,"react-router":33}],204:[function(require,module,exports){
 const React = require("react");
 
-class AboutPage extends React.Component {
+const AboutPage = React.createClass({displayName: "AboutPage",
+  statics: {
+    willTransitionTo: (transition, params, query, callback) => {
+      if (!confirm("Are you sure you want to read the about page?")) {
+        transition.about();
+      } else {
+        callback();
+      }
+    }
+  },
+
   render() {
     return (
       React.createElement("div", {className: "container-fluid"}, 
@@ -50526,7 +50536,7 @@ class AboutPage extends React.Component {
       )
     );
   }
-}
+});
 
 module.exports = AboutPage;
 
