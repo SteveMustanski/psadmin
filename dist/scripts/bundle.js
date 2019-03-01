@@ -50355,7 +50355,7 @@ const Routes = (
     React.createElement(Route, {
       name: "addAuthor", 
       path: "author", 
-      handler: require("./components/ManageAuthorPage")}
+      handler: require("./components/authors/ManageAuthorPage")}
     ), 
     React.createElement(Route, {name: "about", handler: require("./components/about/AboutPage")}), 
     React.createElement(NotFoundRoute, {handler: require("./components/NotFound")}), 
@@ -50366,7 +50366,7 @@ const Routes = (
 
 module.exports = Routes;
 
-},{"./components/App":201,"./components/HomePage":202,"./components/ManageAuthorPage":203,"./components/NotFound":204,"./components/about/AboutPage":205,"./components/authors/AuthorPage":207,"react":197,"react-router":33}],199:[function(require,module,exports){
+},{"./components/App":201,"./components/HomePage":202,"./components/NotFound":203,"./components/about/AboutPage":204,"./components/authors/AuthorPage":207,"./components/authors/ManageAuthorPage":208,"react":197,"react-router":33}],199:[function(require,module,exports){
 "use strict";
 
 //This file is mocking a web API by hitting hard coded data.
@@ -50466,7 +50466,7 @@ class App extends React.Component {
 
 module.exports = App;
 
-},{"./common/Header":208,"jquery":1,"react":197,"react-router":33}],202:[function(require,module,exports){
+},{"./common/Header":209,"jquery":1,"react":197,"react-router":33}],202:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
@@ -50494,23 +50494,6 @@ const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
 
-const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
-  render: () => {
-    return (
-      React.createElement("div", {className: "container-fluid"}, 
-        React.createElement("h1", null, "Manage Author")
-      )
-    );
-  }
-});
-
-module.exports = ManageAuthorPage;
-
-},{"react":197,"react-router":33}],204:[function(require,module,exports){
-const React = require("react");
-const Router = require("react-router");
-const Link = Router.Link;
-
 class NotFound extends React.Component {
   render() {
     return (
@@ -50525,7 +50508,7 @@ class NotFound extends React.Component {
 
 module.exports = NotFound;
 
-},{"react":197,"react-router":33}],205:[function(require,module,exports){
+},{"react":197,"react-router":33}],204:[function(require,module,exports){
 const React = require("react");
 
 const AboutPage = React.createClass({displayName: "AboutPage",
@@ -50567,7 +50550,50 @@ const AboutPage = React.createClass({displayName: "AboutPage",
 
 module.exports = AboutPage;
 
-},{"react":197}],206:[function(require,module,exports){
+},{"react":197}],205:[function(require,module,exports){
+const React = require("react");
+const AuthorApi = require("../../api/authorApi");
+const Router = require("react-router");
+const Link = Router.Link;
+const AuthorList = require("./AuthorList");
+
+const AuthorForm = React.createClass({displayName: "AuthorForm",
+  render: function() {
+    return (
+      React.createElement("div", {className: "container-fluid"}, 
+        React.createElement("form", null, 
+          React.createElement("h1", null, "Manage Author"), 
+          React.createElement("label", {htmlFor: "firstName"}, "First Name"), 
+          React.createElement("input", {
+            type: "text", 
+            name: "firstName", 
+            className: "form-control", 
+            placeholder: "First Name", 
+            ref: "firstName", 
+            value: ""}
+          ), 
+          React.createElement("br", null), 
+          React.createElement("label", {htmlFor: "lastName"}, "First Name"), 
+          React.createElement("input", {
+            type: "text", 
+            name: "lastName", 
+            className: "form-control", 
+            placeholder: "Last Name", 
+            ref: "lastName", 
+            value: ""}
+          ), 
+          React.createElement("br", null), 
+
+          React.createElement("input", {type: "submit", value: "Save", className: "btn btn-success"})
+        )
+      )
+    );
+  }
+});
+
+module.exports = AuthorForm;
+
+},{"../../api/authorApi":199,"./AuthorList":206,"react":197,"react-router":33}],206:[function(require,module,exports){
 "use strict";
 
 const React = require("react");
@@ -50644,6 +50670,23 @@ module.exports = AuthorPage;
 
 },{"../../api/authorApi":199,"./AuthorList":206,"react":197,"react-router":33}],208:[function(require,module,exports){
 const React = require("react");
+
+const AuthorForm = require("./AuthorForm");
+
+const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
+  render: () => {
+    return (
+      React.createElement("div", {className: "container-fluid"}, 
+        React.createElement(AuthorForm, null)
+      )
+    );
+  }
+});
+
+module.exports = ManageAuthorPage;
+
+},{"./AuthorForm":205,"react":197}],209:[function(require,module,exports){
+const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
 
@@ -50681,7 +50724,7 @@ class Header extends React.Component {
 
 module.exports = Header;
 
-},{"react":197,"react-router":33}],209:[function(require,module,exports){
+},{"react":197,"react-router":33}],210:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Routes = require("./Routes");
@@ -50690,4 +50733,4 @@ Router.run(Routes, function(Handler) {
   React.render(React.createElement(Handler, null), document.getElementById("app"));
 });
 
-},{"./Routes":198,"react":197,"react-router":33}]},{},[209]);
+},{"./Routes":198,"react":197,"react-router":33}]},{},[210]);

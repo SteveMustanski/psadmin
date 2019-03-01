@@ -17,7 +17,7 @@ const Routes = (
     <Route
       name="addAuthor"
       path="author"
-      handler={require("./components/ManageAuthorPage")}
+      handler={require("./components/authors/ManageAuthorPage")}
     />
     <Route name="about" handler={require("./components/about/AboutPage")} />
     <NotFoundRoute handler={require("./components/NotFound")} />
