@@ -50342,6 +50342,7 @@ const React = require("react");
 const Router = require("react-router");
 const DefaultRoute = Router.DefaultRoute;
 const Route = Router.Route;
+const NotFoundRoute = Router.NotFoundRoute;
 
 const Routes = (
   React.createElement(Route, {name: "app", path: "/", handler: require("./components/App")}, 
@@ -50350,13 +50351,14 @@ const Routes = (
       name: "authors", 
       handler: require("./components/authors/AuthorPage")}
     ), 
-    React.createElement(Route, {name: "about", handler: require("./components/about/AboutPage")})
+    React.createElement(Route, {name: "about", handler: require("./components/about/AboutPage")}), 
+    React.createElement(NotFoundRoute, {handler: require("./components/NotFound")})
   )
 );
 
 module.exports = Routes;
 
-},{"./components/App":201,"./components/HomePage":202,"./components/about/AboutPage":203,"./components/authors/AuthorPage":205,"react":197,"react-router":33}],199:[function(require,module,exports){
+},{"./components/App":201,"./components/HomePage":202,"./components/NotFound":203,"./components/about/AboutPage":204,"./components/authors/AuthorPage":206,"react":197,"react-router":33}],199:[function(require,module,exports){
 "use strict";
 
 //This file is mocking a web API by hitting hard coded data.
@@ -50456,7 +50458,7 @@ class App extends React.Component {
 
 module.exports = App;
 
-},{"./common/Header":206,"jquery":1,"react":197,"react-router":33}],202:[function(require,module,exports){
+},{"./common/Header":207,"jquery":1,"react":197,"react-router":33}],202:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
@@ -50480,6 +50482,25 @@ class HomePage extends React.Component {
 module.exports = HomePage;
 
 },{"react":197,"react-router":33}],203:[function(require,module,exports){
+const React = require("react");
+const Router = require("react-router");
+const Link = Router.Link;
+
+class NotFound extends React.Component {
+  render() {
+    return (
+      React.createElement("div", {className: "container"}, 
+        React.createElement("h1", null, "Page Not Found"), 
+        React.createElement("p", null, "Looks like you referenced a page that doesn't exist."), 
+        React.createElement(Link, {to: "app"}, "Return to Home Page")
+      )
+    );
+  }
+}
+
+module.exports = NotFound;
+
+},{"react":197,"react-router":33}],204:[function(require,module,exports){
 const React = require("react");
 
 class AboutPage extends React.Component {
@@ -50506,7 +50527,7 @@ class AboutPage extends React.Component {
 
 module.exports = AboutPage;
 
-},{"react":197}],204:[function(require,module,exports){
+},{"react":197}],205:[function(require,module,exports){
 "use strict";
 
 const React = require("react");
@@ -50544,7 +50565,7 @@ const AuthorList = React.createClass({displayName: "AuthorList",
 
 module.exports = AuthorList;
 
-},{"react":197}],205:[function(require,module,exports){
+},{"react":197}],206:[function(require,module,exports){
 "use strict";
 
 const React = require("react");
@@ -50576,7 +50597,7 @@ const AuthorPage = React.createClass({displayName: "AuthorPage",
 
 module.exports = AuthorPage;
 
-},{"../../api/authorApi":199,"./AuthorList":204,"react":197}],206:[function(require,module,exports){
+},{"../../api/authorApi":199,"./AuthorList":205,"react":197}],207:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
@@ -50615,7 +50636,7 @@ class Header extends React.Component {
 
 module.exports = Header;
 
-},{"react":197,"react-router":33}],207:[function(require,module,exports){
+},{"react":197,"react-router":33}],208:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Routes = require("./Routes");
@@ -50624,4 +50645,4 @@ Router.run(Routes, function(Handler) {
   React.render(React.createElement(Handler, null), document.getElementById("app"));
 });
 
-},{"./Routes":198,"react":197,"react-router":33}]},{},[207]);
+},{"./Routes":198,"react":197,"react-router":33}]},{},[208]);
