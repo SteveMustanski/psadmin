@@ -1,4 +1,6 @@
 const React = require("react");
+const Router = require("react-router");
+const Link = Router.Link;
 
 class Header extends React.Component {
   render() {
@@ -11,19 +13,19 @@ class Header extends React.Component {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link" href="/">
-                Home <span className="sr-only">(current)</span>
-              </a>
+              <Link className="nav-link" to="app">
+                Home
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/#Authors">
+              <Link className="nav-link" to="authors">
                 Authors
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/#About">
+              <Link className="nav-link" to="about">
                 About
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

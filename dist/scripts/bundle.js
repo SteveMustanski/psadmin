@@ -50573,6 +50573,8 @@ module.exports = AuthorPage;
 
 },{"../../api/authorApi":199,"./AuthorList":204,"react":197}],206:[function(require,module,exports){
 const React = require("react");
+const Router = require("react-router");
+const Link = Router.Link;
 
 class Header extends React.Component {
   render() {
@@ -50585,17 +50587,17 @@ class Header extends React.Component {
         React.createElement("div", {className: "collapse navbar-collapse", id: "navbarNav"}, 
           React.createElement("ul", {className: "navbar-nav"}, 
             React.createElement("li", {className: "nav-item"}, 
-              React.createElement("a", {className: "nav-link", href: "/"}, 
-                "Home ", React.createElement("span", {className: "sr-only"}, "(current)")
+              React.createElement(Link, {className: "nav-link", to: "app"}, 
+                "Home"
               )
             ), 
             React.createElement("li", {className: "nav-item"}, 
-              React.createElement("a", {className: "nav-link", href: "/#Authors"}, 
+              React.createElement(Link, {className: "nav-link", to: "authors"}, 
                 "Authors"
               )
             ), 
             React.createElement("li", {className: "nav-item"}, 
-              React.createElement("a", {className: "nav-link", href: "/#About"}, 
+              React.createElement(Link, {className: "nav-link", to: "about"}, 
                 "About"
               )
             )
@@ -50608,7 +50610,7 @@ class Header extends React.Component {
 
 module.exports = Header;
 
-},{"react":197}],207:[function(require,module,exports){
+},{"react":197,"react-router":33}],207:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Routes = require("./Routes");
