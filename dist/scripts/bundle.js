@@ -50565,22 +50565,24 @@ const AuthorForm = React.createClass({displayName: "AuthorForm",
           React.createElement("h1", null, "Manage Author"), 
           React.createElement("label", {htmlFor: "firstName"}, "First Name"), 
           React.createElement("input", {
+            onChange: this.props.onChange, 
             type: "text", 
             name: "firstName", 
             className: "form-control", 
             placeholder: "First Name", 
-            ref: "firstName", 
-            value: ""}
+            ref: "firstName"}
+            // value={this.props.author.fisrtName}
           ), 
           React.createElement("br", null), 
           React.createElement("label", {htmlFor: "lastName"}, "First Name"), 
           React.createElement("input", {
+            onChange: this.props.onChange, 
             type: "text", 
             name: "lastName", 
             className: "form-control", 
             placeholder: "Last Name", 
-            ref: "lastName", 
-            value: ""}
+            ref: "lastName"}
+            // value={this.props.author.lastName}
           ), 
           React.createElement("br", null), 
 
@@ -50674,12 +50676,19 @@ const React = require("react");
 const AuthorForm = require("./AuthorForm");
 
 const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
+  getInitialState: function() {
+    return {
+      author: { id: "", firstName: "", lastName: "" }
+    };
+  },
+  setAuthorState: function(e) {
+    let field = e.target.name;
+    let value = e.target.value;
+    this.state.author[field] = value;
+    return this.setState({ author: this.state.author });
+  },
   render: () => {
-    return (
-      React.createElement("div", {className: "container-fluid"}, 
-        React.createElement(AuthorForm, null)
-      )
-    );
+    return React.createElement(AuthorForm, {onChange: this.setAuthorState});
   }
 });
 

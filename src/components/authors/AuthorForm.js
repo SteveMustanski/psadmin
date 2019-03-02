@@ -12,22 +12,24 @@ const AuthorForm = React.createClass({
           <h1>Manage Author</h1>
           <label htmlFor="firstName">First Name</label>
           <input
+            onChange={this.props.onChange}
             type="text"
             name="firstName"
             className="form-control"
             placeholder="First Name"
             ref="firstName"
-            value=""
+            // value={this.props.author.fisrtName}
           />
           <br />
           <label htmlFor="lastName">First Name</label>
           <input
+            onChange={this.props.onChange}
             type="text"
             name="lastName"
             className="form-control"
             placeholder="Last Name"
             ref="lastName"
-            value=""
+            // value={this.props.author.lastName}
           />
           <br />
 
