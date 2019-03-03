@@ -50578,7 +50578,12 @@ const AuthorForm = React.createClass({displayName: "AuthorForm",
             onChange: this.props.onChange}
           ), 
 
-          React.createElement("input", {type: "submit", value: "Save", className: "btn btn-success"})
+          React.createElement("input", {
+            type: "submit", 
+            value: "Save", 
+            className: "btn btn-success", 
+            onClick: this.props.onSave}
+          )
         )
       )
     );
@@ -50664,8 +50669,8 @@ module.exports = AuthorPage;
 
 },{"../../api/authorApi":199,"./AuthorList":206,"react":197,"react-router":33}],208:[function(require,module,exports){
 const React = require("react");
-
 const AuthorForm = require("./AuthorForm");
+const AuthorApi = require("../../api/authorApi");
 
 const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
   getInitialState: function() {
@@ -50679,16 +50684,26 @@ const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
     this.state.author[field] = value;
     return this.setState({ author: this.state.author });
   },
+
+  saveAuthor: function(e) {
+    e.preventDefault();
+    AuthorApi.saveAuthor(this.state.author);
+  },
+
   render: function() {
     return (
-      React.createElement(AuthorForm, {author: this.state.author, onChange: this.setAuthorState})
+      React.createElement(AuthorForm, {
+        author: this.state.author, 
+        onChange: this.setAuthorState, 
+        onSave: this.saveAuthor}
+      )
     );
   }
 });
 
 module.exports = ManageAuthorPage;
 
-},{"./AuthorForm":205,"react":197}],209:[function(require,module,exports){
+},{"../../api/authorApi":199,"./AuthorForm":205,"react":197}],209:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
