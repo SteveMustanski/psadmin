@@ -1,8 +1,10 @@
 const React = require("react");
+const Router = require("react-router");
 const AuthorForm = require("./AuthorForm");
 const AuthorApi = require("../../api/authorApi");
 
 const ManageAuthorPage = React.createClass({
+  mixins: [Router.Navigation],
   getInitialState: function() {
     return {
       author: { id: "", firstName: "", lastName: "" }
@@ -18,6 +20,7 @@ const ManageAuthorPage = React.createClass({
   saveAuthor: function(e) {
     e.preventDefault();
     AuthorApi.saveAuthor(this.state.author);
+    this.transitionTo("authors");
   },
 
   render: function() {

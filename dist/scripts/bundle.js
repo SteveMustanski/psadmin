@@ -50552,10 +50552,7 @@ module.exports = AboutPage;
 
 },{"react":197}],205:[function(require,module,exports){
 const React = require("react");
-const AuthorApi = require("../../api/authorApi");
 const Router = require("react-router");
-const Link = Router.Link;
-const AuthorList = require("./AuthorList");
 const Input = require("../common/Input");
 
 const AuthorForm = React.createClass({displayName: "AuthorForm",
@@ -50592,7 +50589,7 @@ const AuthorForm = React.createClass({displayName: "AuthorForm",
 
 module.exports = AuthorForm;
 
-},{"../../api/authorApi":199,"../common/Input":210,"./AuthorList":206,"react":197,"react-router":33}],206:[function(require,module,exports){
+},{"../common/Input":210,"react":197,"react-router":33}],206:[function(require,module,exports){
 "use strict";
 
 const React = require("react");
@@ -50669,10 +50666,12 @@ module.exports = AuthorPage;
 
 },{"../../api/authorApi":199,"./AuthorList":206,"react":197,"react-router":33}],208:[function(require,module,exports){
 const React = require("react");
+const Router = require("react-router");
 const AuthorForm = require("./AuthorForm");
 const AuthorApi = require("../../api/authorApi");
 
 const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
+  mixins: [Router.Navigation],
   getInitialState: function() {
     return {
       author: { id: "", firstName: "", lastName: "" }
@@ -50688,6 +50687,7 @@ const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
   saveAuthor: function(e) {
     e.preventDefault();
     AuthorApi.saveAuthor(this.state.author);
+    this.transitionTo("authors");
   },
 
   render: function() {
@@ -50703,7 +50703,7 @@ const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
 
 module.exports = ManageAuthorPage;
 
-},{"../../api/authorApi":199,"./AuthorForm":205,"react":197}],209:[function(require,module,exports){
+},{"../../api/authorApi":199,"./AuthorForm":205,"react":197,"react-router":33}],209:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;

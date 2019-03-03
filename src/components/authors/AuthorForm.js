@@ -1,8 +1,5 @@
 const React = require("react");
-const AuthorApi = require("../../api/authorApi");
 const Router = require("react-router");
-const Link = Router.Link;
-const AuthorList = require("./AuthorList");
 const Input = require("../common/Input");
 
 const AuthorForm = React.createClass({
