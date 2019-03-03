@@ -1,21 +1,6 @@
 const React = require("react");
 
 const AboutPage = React.createClass({
-  statics: {
-    willTransitionTo: (transition, params, query, callback) => {
-      if (!confirm("Are you sure you want to read the about page?")) {
-        transition.about();
-      } else {
-        callback();
-      }
-    },
-    willTransitionFrom: (transition, compoenent) => {
-      if (!confirm("Are you sure you want to leave this page?")) {
-        transition.about();
-      }
-    }
-  },
-
   render() {
     return (
       <div className="container-fluid">

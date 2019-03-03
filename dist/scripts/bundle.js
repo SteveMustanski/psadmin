@@ -50990,21 +50990,6 @@ module.exports = NotFound;
 const React = require("react");
 
 const AboutPage = React.createClass({displayName: "AboutPage",
-  statics: {
-    willTransitionTo: (transition, params, query, callback) => {
-      if (!confirm("Are you sure you want to read the about page?")) {
-        transition.about();
-      } else {
-        callback();
-      }
-    },
-    willTransitionFrom: (transition, compoenent) => {
-      if (!confirm("Are you sure you want to leave this page?")) {
-        transition.about();
-      }
-    }
-  },
-
   render() {
     return (
       React.createElement("div", {className: "container-fluid"}, 
@@ -51159,13 +51144,25 @@ const toastr = require("toastr");
 
 const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
   mixins: [Router.Navigation],
+  statics: {
+    willTransitionFrom: (transition, compoenent) => {
+      if (
+        compoenent.state.dirty &&
+        !confirm("Are you sure you want to leave without saving?")
+      ) {
+        transition.abort();
+      }
+    }
+  },
   getInitialState: function() {
     return {
       author: { id: "", firstName: "", lastName: "" },
-      errors: {}
+      errors: {},
+      dirty: false
     };
   },
   setAuthorState: function(e) {
+    this.setState({ dirty: true });
     let field = e.target.name;
     let value = e.target.value;
     this.state.author[field] = value;
@@ -51195,6 +51192,7 @@ const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
       return;
     }
     AuthorApi.saveAuthor(this.state.author);
+    this.setState({ dirty: false });
     toastr.success("Author Saved");
     this.transitionTo("authors");
   },
