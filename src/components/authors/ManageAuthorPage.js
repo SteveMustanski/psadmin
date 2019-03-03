@@ -8,7 +8,8 @@ const ManageAuthorPage = React.createClass({
   mixins: [Router.Navigation],
   getInitialState: function() {
     return {
-      author: { id: "", firstName: "", lastName: "" }
+      author: { id: "", firstName: "", lastName: "" },
+      errors: {}
     };
   },
   setAuthorState: function(e) {
@@ -18,8 +19,28 @@ const ManageAuthorPage = React.createClass({
     return this.setState({ author: this.state.author });
   },
 
+  authorFormIsValid: function() {
+    let FormIsValid = true;
+    this.state.errors = {};
+    if (this.state.author.firstName.length < 3) {
+      this.state.errors.firstName =
+        "First name must contain at least 3 characters.";
+      FormIsValid = false;
+    }
+    if (this.state.author.lastName.length < 3) {
+      this.state.errors.lastName =
+        "Last name must contain at least 3 characters.";
+      FormIsValid = false;
+    }
+    this.setState({ errors: this.state.errors });
+    return FormIsValid;
+  },
+
   saveAuthor: function(e) {
     e.preventDefault();
+    if (!this.authorFormIsValid()) {
+      return;
+    }
     AuthorApi.saveAuthor(this.state.author);
     toastr.success("Author Saved");
     this.transitionTo("authors");
@@ -31,6 +52,7 @@ const ManageAuthorPage = React.createClass({
         author={this.state.author}
         onChange={this.setAuthorState}
         onSave={this.saveAuthor}
+        errors={this.state.errors}
       />
     );
   }
