@@ -3,6 +3,7 @@ const AuthorApi = require("../../api/authorApi");
 const Router = require("react-router");
 const Link = Router.Link;
 const AuthorList = require("./AuthorList");
+const Input = require("../common/Input");
 
 const AuthorForm = React.createClass({
   render: function() {
@@ -10,28 +11,19 @@ const AuthorForm = React.createClass({
       <div className="container-fluid">
         <form>
           <h1>Manage Author</h1>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            onChange={this.props.onChange}
-            type="text"
+          <Input
             name="firstName"
-            className="form-control"
-            placeholder="First Name"
-            ref="firstName"
-            // value={this.props.author.fisrtName}
-          />
-          <br />
-          <label htmlFor="lastName">First Name</label>
-          <input
+            label="First Name"
+            value={this.props.author.firstName}
             onChange={this.props.onChange}
-            type="text"
-            name="lastName"
-            className="form-control"
-            placeholder="Last Name"
-            ref="lastName"
-            // value={this.props.author.lastName}
           />
-          <br />
+
+          <Input
+            name="lastName"
+            label="Last Name"
+            value={this.props.author.lastName}
+            onChange={this.props.onChange}
+          />
 
           <input type="submit" value="Save" className="btn btn-success" />
         </form>

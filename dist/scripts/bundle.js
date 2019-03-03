@@ -50556,6 +50556,7 @@ const AuthorApi = require("../../api/authorApi");
 const Router = require("react-router");
 const Link = Router.Link;
 const AuthorList = require("./AuthorList");
+const Input = require("../common/Input");
 
 const AuthorForm = React.createClass({displayName: "AuthorForm",
   render: function() {
@@ -50563,28 +50564,19 @@ const AuthorForm = React.createClass({displayName: "AuthorForm",
       React.createElement("div", {className: "container-fluid"}, 
         React.createElement("form", null, 
           React.createElement("h1", null, "Manage Author"), 
-          React.createElement("label", {htmlFor: "firstName"}, "First Name"), 
-          React.createElement("input", {
-            onChange: this.props.onChange, 
-            type: "text", 
+          React.createElement(Input, {
             name: "firstName", 
-            className: "form-control", 
-            placeholder: "First Name", 
-            ref: "firstName"}
-            // value={this.props.author.fisrtName}
+            label: "First Name", 
+            value: this.props.author.firstName, 
+            onChange: this.props.onChange}
           ), 
-          React.createElement("br", null), 
-          React.createElement("label", {htmlFor: "lastName"}, "First Name"), 
-          React.createElement("input", {
-            onChange: this.props.onChange, 
-            type: "text", 
+
+          React.createElement(Input, {
             name: "lastName", 
-            className: "form-control", 
-            placeholder: "Last Name", 
-            ref: "lastName"}
-            // value={this.props.author.lastName}
+            label: "Last Name", 
+            value: this.props.author.lastName, 
+            onChange: this.props.onChange}
           ), 
-          React.createElement("br", null), 
 
           React.createElement("input", {type: "submit", value: "Save", className: "btn btn-success"})
         )
@@ -50595,7 +50587,7 @@ const AuthorForm = React.createClass({displayName: "AuthorForm",
 
 module.exports = AuthorForm;
 
-},{"../../api/authorApi":199,"./AuthorList":206,"react":197,"react-router":33}],206:[function(require,module,exports){
+},{"../../api/authorApi":199,"../common/Input":210,"./AuthorList":206,"react":197,"react-router":33}],206:[function(require,module,exports){
 "use strict";
 
 const React = require("react");
@@ -50737,6 +50729,45 @@ module.exports = Header;
 
 },{"react":197,"react-router":33}],210:[function(require,module,exports){
 const React = require("react");
+
+const Input = React.createClass({displayName: "Input",
+  propTypes: {
+    name: React.PropTypes.string.isRequired,
+    label: React.PropTypes.string.isRequired,
+    onChange: React.PropTypes.func.isRequired,
+    placeholder: React.PropTypes.string,
+    value: React.PropTypes.string,
+    error: React.PropTypes.string
+  },
+  render: function() {
+    let wrapperClass = "form-group";
+    if (this.props.error && this.props.error.length > 0) {
+      wrapperClass += " " + "has-error";
+    }
+    return (
+      React.createElement("div", {className: wrapperClass}, 
+        React.createElement("label", {htmlFor: this.props.name}, this.props.label), 
+        React.createElement("div", {className: "field"}, 
+          React.createElement("input", {
+            type: "text", 
+            name: this.props.name, 
+            className: "form-control", 
+            placeholder: this.props.placeholder, 
+            ref: this.props.name, 
+            value: this.props.value, 
+            onChange: this.props.onChange}
+          ), 
+          React.createElement("div", {className: "input"}, this.props.error)
+        )
+      )
+    );
+  }
+});
+
+module.exports = Input;
+
+},{"react":197}],211:[function(require,module,exports){
+const React = require("react");
 const Router = require("react-router");
 const Routes = require("./Routes");
 
@@ -50744,4 +50775,4 @@ Router.run(Routes, function(Handler) {
   React.render(React.createElement(Handler, null), document.getElementById("app"));
 });
 
-},{"./Routes":198,"react":197,"react-router":33}]},{},[210]);
+},{"./Routes":198,"react":197,"react-router":33}]},{},[211]);
