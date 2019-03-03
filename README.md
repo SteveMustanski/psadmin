@@ -15,7 +15,7 @@ in this repo.
 
 This project has several dependencies and specific versions for some of the older techniques to function properly.
 
-Here is a list of the modules used:
+Here is a list of the modules used and their versions:
 
 - bootstrap 4.3.1
 - browserfy 1.0.0
