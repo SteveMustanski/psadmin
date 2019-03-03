@@ -50687,8 +50687,10 @@ const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
     this.state.author[field] = value;
     return this.setState({ author: this.state.author });
   },
-  render: () => {
-    return React.createElement(AuthorForm, {onChange: this.setAuthorState});
+  render: function() {
+    return (
+      React.createElement(AuthorForm, {author: this.state.author, onChange: this.setAuthorState})
+    );
   }
 });
 
