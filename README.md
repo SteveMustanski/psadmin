@@ -32,3 +32,4 @@ Here is a list of the modules used and their versions:
 - react-router 0.13.3
 - reactify 1.1.1
 - vinyl-source-stream 2.0.0
+- toastr 2.1.4
