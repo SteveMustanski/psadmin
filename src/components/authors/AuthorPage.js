@@ -14,6 +14,18 @@ const AuthorPage = React.createClass({
     };
   },
 
+  componentWillMount: function() {
+    AuthorStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnMount: function() {
+    AuthorStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState({ authors: AuthorStore.getAllAuthors() });
+  },
+
   render: function() {
     return (
       <div className="container-fluid">
