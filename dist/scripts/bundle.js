@@ -51785,7 +51785,7 @@ const Routes = (
 
 module.exports = Routes;
 
-},{"./components/App":208,"./components/HomePage":209,"./components/NotFound":210,"./components/about/AboutPage":211,"./components/authors/AuthorPage":214,"./components/authors/ManageAuthorPage":215,"react":202,"react-router":38}],205:[function(require,module,exports){
+},{"./components/App":209,"./components/HomePage":210,"./components/NotFound":211,"./components/about/AboutPage":212,"./components/authors/AuthorPage":215,"./components/authors/ManageAuthorPage":216,"react":202,"react-router":38}],205:[function(require,module,exports){
 "use strict";
 
 const Dispatcher = require("../dispatcher/appDispatcher");
@@ -51806,7 +51806,27 @@ const AuthorActions = {
 
 module.exports = AuthorActions;
 
-},{"../api/authorApi":206,"../constants/actionTypes":218,"../dispatcher/appDispatcher":219}],206:[function(require,module,exports){
+},{"../api/authorApi":207,"../constants/actionTypes":219,"../dispatcher/appDispatcher":220}],206:[function(require,module,exports){
+"use strict";
+
+const Dispatcher = require("../dispatcher/appDispatcher");
+const AuthorApi = require("../api/authorApi");
+const ActionTypes = require("../constants/actionTypes");
+
+const InitializeActions = {
+  initApp: function() {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.INITIALIZE,
+      initialData: {
+        authors: AuthorApi.getAllAuthors()
+      }
+    });
+  }
+};
+
+module.exports = InitializeActions;
+
+},{"../api/authorApi":207,"../constants/actionTypes":219,"../dispatcher/appDispatcher":220}],207:[function(require,module,exports){
 "use strict";
 
 //This file is mocking a web API by hitting hard coded data.
@@ -51865,7 +51885,7 @@ var AuthorApi = {
 
 module.exports = AuthorApi;
 
-},{"./authorData":207,"lodash":6}],207:[function(require,module,exports){
+},{"./authorData":208,"lodash":6}],208:[function(require,module,exports){
 module.exports = {
   authors: [
     {
@@ -51886,7 +51906,7 @@ module.exports = {
   ]
 };
 
-},{}],208:[function(require,module,exports){
+},{}],209:[function(require,module,exports){
 $ = jQuery = require("jquery"); // the example used a global for some reason
 
 const React = require("react");
@@ -51906,7 +51926,7 @@ class App extends React.Component {
 
 module.exports = App;
 
-},{"./common/Header":216,"jquery":5,"react":202,"react-router":38}],209:[function(require,module,exports){
+},{"./common/Header":217,"jquery":5,"react":202,"react-router":38}],210:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
@@ -51929,7 +51949,7 @@ class HomePage extends React.Component {
 
 module.exports = HomePage;
 
-},{"react":202,"react-router":38}],210:[function(require,module,exports){
+},{"react":202,"react-router":38}],211:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
@@ -51948,7 +51968,7 @@ class NotFound extends React.Component {
 
 module.exports = NotFound;
 
-},{"react":202,"react-router":38}],211:[function(require,module,exports){
+},{"react":202,"react-router":38}],212:[function(require,module,exports){
 const React = require("react");
 
 const AboutPage = React.createClass({displayName: "AboutPage",
@@ -51975,7 +51995,7 @@ const AboutPage = React.createClass({displayName: "AboutPage",
 
 module.exports = AboutPage;
 
-},{"react":202}],212:[function(require,module,exports){
+},{"react":202}],213:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Input = require("../common/Input");
@@ -52022,7 +52042,7 @@ const AuthorForm = React.createClass({displayName: "AuthorForm",
 
 module.exports = AuthorForm;
 
-},{"../common/Input":217,"react":202,"react-router":38}],213:[function(require,module,exports){
+},{"../common/Input":218,"react":202,"react-router":38}],214:[function(require,module,exports){
 "use strict";
 
 const React = require("react");
@@ -52064,7 +52084,7 @@ const AuthorList = React.createClass({displayName: "AuthorList",
 
 module.exports = AuthorList;
 
-},{"react":202,"react-router":38}],214:[function(require,module,exports){
+},{"react":202,"react-router":38}],215:[function(require,module,exports){
 "use strict";
 
 const React = require("react");
@@ -52096,7 +52116,7 @@ const AuthorPage = React.createClass({displayName: "AuthorPage",
 
 module.exports = AuthorPage;
 
-},{"../../actions/AuthorActions":205,"../../stores/AuthorStore":221,"./AuthorList":213,"react":202,"react-router":38}],215:[function(require,module,exports){
+},{"../../actions/AuthorActions":205,"../../stores/AuthorStore":222,"./AuthorList":214,"react":202,"react-router":38}],216:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const AuthorForm = require("./AuthorForm");
@@ -52180,7 +52200,7 @@ const ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
 
 module.exports = ManageAuthorPage;
 
-},{"../../actions/AuthorActions":205,"../../stores/AuthorStore":221,"./AuthorForm":212,"react":202,"react-router":38,"toastr":203}],216:[function(require,module,exports){
+},{"../../actions/AuthorActions":205,"../../stores/AuthorStore":222,"./AuthorForm":213,"react":202,"react-router":38,"toastr":203}],217:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
@@ -52219,7 +52239,7 @@ class Header extends React.Component {
 
 module.exports = Header;
 
-},{"react":202,"react-router":38}],217:[function(require,module,exports){
+},{"react":202,"react-router":38}],218:[function(require,module,exports){
 const React = require("react");
 
 const Input = React.createClass({displayName: "Input",
@@ -52258,28 +52278,32 @@ const Input = React.createClass({displayName: "Input",
 
 module.exports = Input;
 
-},{"react":202}],218:[function(require,module,exports){
+},{"react":202}],219:[function(require,module,exports){
 "use strict";
 const keyMirror = require("react/lib/keyMirror");
 
 module.exports = keyMirror({
-  CREATE_AUTHOR: null
+  CREATE_AUTHOR: null,
+  INITIALIZE: null
 });
 
-},{"react/lib/keyMirror":187}],219:[function(require,module,exports){
+},{"react/lib/keyMirror":187}],220:[function(require,module,exports){
 const Dispatcher = require("flux").Dispatcher;
 module.exports = new Dispatcher();
 
-},{"flux":2}],220:[function(require,module,exports){
+},{"flux":2}],221:[function(require,module,exports){
 const React = require("react");
 const Router = require("react-router");
 const Routes = require("./Routes");
+const InitializeActions = require("./actions/InitializeActions");
+
+InitializeActions.initApp();
 
 Router.run(Routes, function(Handler) {
   React.render(React.createElement(Handler, null), document.getElementById("app"));
 });
 
-},{"./Routes":204,"react":202,"react-router":38}],221:[function(require,module,exports){
+},{"./Routes":204,"./actions/InitializeActions":206,"react":202,"react-router":38}],222:[function(require,module,exports){
 "use strict";
 
 const Dispatcher = require("../dispatcher/appDispatcher");
@@ -52312,12 +52336,19 @@ const AuthorStore = assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(action) {
   switch (action.actionType) {
+    case ActionTypes.INITIALIZE:
+      _authors = action.initialData.authors;
+      AuthorStore.emitChange();
+      break;
     case ActionTypes.CREATE_AUTHOR:
       _authors.push(action.author);
       AuthorStore.emitChange();
+      break;
+    default:
+    // nothing to do here
   }
 });
 
 module.exports = AuthorStore;
 
-},{"../constants/actionTypes":218,"../dispatcher/appDispatcher":219,"events":1,"lodash":6,"object-assign":7}]},{},[220]);
+},{"../constants/actionTypes":219,"../dispatcher/appDispatcher":220,"events":1,"lodash":6,"object-assign":7}]},{},[221]);
