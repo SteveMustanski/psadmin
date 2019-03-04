@@ -22,6 +22,15 @@ const AuthorActions = {
       actionType: ActionTypes.UPDATE_AUTHOR,
       author: updatedAuthor
     });
+  },
+  deleteAuthor: function(id) {
+    AuthorApi.deleteAuthor(id);
+
+    // tells the dispatcher to tell stores an author was updated
+    Dispatcher.dispatch({
+      actionType: ActionTypes.DELETE_AUTHOR,
+      id: id
+    });
   }
 };
 

@@ -51810,6 +51810,15 @@ const AuthorActions = {
       actionType: ActionTypes.UPDATE_AUTHOR,
       author: updatedAuthor
     });
+  },
+  deleteAuthor: function(id) {
+    AuthorApi.deleteAuthor(id);
+
+    // tells the dispatcher to tell stores an author was updated
+    Dispatcher.dispatch({
+      actionType: ActionTypes.DELETE_AUTHOR,
+      id: id
+    });
   }
 };
 
@@ -52057,15 +52066,28 @@ module.exports = AuthorForm;
 const React = require("react");
 const Router = require("react-router");
 const Link = Router.Link;
+const AuthorActions = require("../../actions/AuthorActions");
+const toastr = require("toastr");
 
 const AuthorList = React.createClass({displayName: "AuthorList",
   // propTypes: {
   //   authors: React.propTypes.isRequired
   // },
+
+  deleteAuthor: function(id, event) {
+    event.preventDefault();
+    AuthorActions.deleteAuthor(id);
+    toastr.success("Author Deleted");
+  },
   render: function() {
     const createAuthorRow = function(author) {
       return (
         React.createElement("tr", {key: author.id}, 
+          React.createElement("td", null, 
+            React.createElement("a", {href: "#", onClick: this.deleteAuthor.bind(this, author.id)}, 
+              "Delete"
+            )
+          ), 
           React.createElement("td", null, 
             React.createElement(Link, {to: "manageAuthor", params: { id: author.id}}, 
               author.id
@@ -52081,6 +52103,7 @@ const AuthorList = React.createClass({displayName: "AuthorList",
       React.createElement("div", {className: "container-fluid"}, 
         React.createElement("table", {className: "table"}, 
           React.createElement("thead", null, 
+            React.createElement("th", null), 
             React.createElement("th", null, "ID"), 
             React.createElement("th", null, "Name")
           ), 
@@ -52093,7 +52116,7 @@ const AuthorList = React.createClass({displayName: "AuthorList",
 
 module.exports = AuthorList;
 
-},{"react":202,"react-router":38}],215:[function(require,module,exports){
+},{"../../actions/AuthorActions":205,"react":202,"react-router":38,"toastr":203}],215:[function(require,module,exports){
 "use strict";
 
 const React = require("react");
@@ -52311,7 +52334,8 @@ const keyMirror = require("react/lib/keyMirror");
 module.exports = keyMirror({
   CREATE_AUTHOR: null,
   INITIALIZE: null,
-  UPDATE_AUTHOR: null
+  UPDATE_AUTHOR: null,
+  DELETE_AUTHOR: null
 });
 
 },{"react/lib/keyMirror":187}],220:[function(require,module,exports){
@@ -52375,6 +52399,12 @@ Dispatcher.register(function(action) {
       let existingAuthor = _.find(_authors, { id: action.author.id });
       let existingAuthorIndex = _.indexOf(_authors, existingAuthor);
       _authors.splice(existingAuthorIndex, 1, action.author);
+      AuthorStore.emitChange();
+      break;
+    case ActionTypes.DELETE_AUTHOR:
+      _.remove(_authors, function(author) {
+        return action.id === author.id;
+      });
       AuthorStore.emitChange();
       break;
     default:
