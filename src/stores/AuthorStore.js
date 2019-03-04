@@ -38,6 +38,12 @@ Dispatcher.register(function(action) {
       _authors.push(action.author);
       AuthorStore.emitChange();
       break;
+    case ActionTypes.UPDATE_AUTHOR:
+      let existingAuthor = _.find(_authors, { id: action.author.id });
+      let existingAuthorIndex = _.indexOf(_authors, existingAuthor);
+      _authors.splice(existingAuthorIndex, 1, action.author);
+      AuthorStore.emitChange();
+      break;
     default:
     // nothing to do here
   }

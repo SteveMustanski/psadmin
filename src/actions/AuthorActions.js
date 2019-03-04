@@ -13,6 +13,15 @@ const AuthorActions = {
       actionType: ActionTypes.CREATE_AUTHOR,
       author: newAuthor
     });
+  },
+  updateAuthor: function(author) {
+    let updatedAuthor = AuthorApi.saveAuthor(author);
+
+    // tells the dispatcher to tell stores an author was updated
+    Dispatcher.dispatch({
+      actionType: ActionTypes.UPDATE_AUTHOR,
+      author: updatedAuthor
+    });
   }
 };
 
